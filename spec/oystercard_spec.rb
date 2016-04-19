@@ -13,10 +13,17 @@ describe Oystercard do
 		it "adds money to its balance" do
 			expect { oystercard.top_up 1 }.to change{ oystercard.balance }.by 1
 		end
-		
+
 		it "raises error if exceeding MAX amount" do
 		  oystercard.top_up described_class::MAXIMUM_BALANCE
 		  expect { oystercard.top_up 1 }.to raise_error "Cannot exceed the limit of #{described_class::MAXIMUM_BALANCE}"
 		end
 	end
+
+	describe "#deduct" do
+		it "deducts money from its balance" do
+			expect { oystercard.deduct 1 }.to change{ oystercard.balance }.by -1
+		end
+	end
+	
 end
