@@ -28,6 +28,11 @@ describe Oystercard do
     it "is expected to respond to touch in with one argument"
     it { is_expected.to respond_to(:touch_in).with(1).argument }
 
+    it "is expected to respond with its start station" do
+    station = spy ('station')
+    oystercard.top_up 1
+    expect (oystercard.touch_in(station)).to eq station
+    end
 
 		xit "responds to being touched in" do
 			oystercard.top_up 1
