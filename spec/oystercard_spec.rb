@@ -73,8 +73,8 @@ describe Oystercard do
   describe "#journeys" do
     it "gives a list of journeys" do
       oystercard.top_up 10
-      wimbledon = Station.new
-      blackfriars = Station.new
+      wimbledon = Station.new('wimbledon', 4)
+      blackfriars = Station.new('blackfriar', 1)
       oystercard.touch_in(wimbledon)
       oystercard.touch_out(blackfriars)
       expect(oystercard.journeys).to include({wimbledon => blackfriars})
