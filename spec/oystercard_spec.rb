@@ -13,7 +13,7 @@ describe Oystercard do
 			expect(oystercard).not_to be_in_journey
 		end
 
-    it "has no journey history by default" do 
+    it "has no journey history by default" do
       expect(oystercard.journeys).to eq []
     end
   end
@@ -30,8 +30,6 @@ describe Oystercard do
 	end
 
 	describe "#touch_in" do
-    it "is expected to respond to touch in with one argument"
-    it { is_expected.to respond_to(:touch_in).with(1).argument }
 
     it "is expected to respond with its start station" do
     station = spy ('station')
@@ -39,15 +37,15 @@ describe Oystercard do
     expect (oystercard.touch_in(station)).to eq station
     end
 
-		xit "responds to being touched in" do
+		it "responds to being touched in" do
 			oystercard.top_up 1
 			oystercard.touch_in(station)
 			expect(oystercard).to be_in_journey
 		end
 
-		xit "raise error if not enough balance" do
+		it "raise error if not enough balance" do
 		  message = "Cannot touch in: not enough money for minimum fare of #{described_class::MINIMUM_FARE}"
-		  expect { oystercard.touch_in }.to raise_error message
+		  expect { oystercard.touch_in(station) }.to raise_error message
 		end
 
 	end
@@ -64,7 +62,7 @@ describe Oystercard do
       expect { oystercard.touch_out(station) }.to change { oystercard.balance }.by -described_class::MINIMUM_FARE
     end
 
-    it "creates one journey on touch out" do 
+    it "creates one journey on touch out" do
       oystercard.top_up 10
       oystercard.touch_in(station)
       oystercard.touch_out(station)
@@ -72,16 +70,16 @@ describe Oystercard do
     end
 	end
 
-  describe "#journeys" do 
-    it "gives a list of journeys" do 
-      oystercard.top_up 10 
+  describe "#journeys" do
+    it "gives a list of journeys" do
+      oystercard.top_up 10
       wimbledon = Station.new
       blackfriars = Station.new
       oystercard.touch_in(wimbledon)
       oystercard.touch_out(blackfriars)
-      expect(oystercard.journeys).to include({wimbledon => blackfriars}) 
+      expect(oystercard.journeys).to include({wimbledon => blackfriars})
     end
   end
-    
+
 
 end
