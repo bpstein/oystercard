@@ -9,7 +9,7 @@ station2 = Station.new('Waterloo', 1)
 oyster.top_up(50)
 oyster.touch_in(station1)
 oyster.touch_out(station2)
-p oyster.journey_log
+p oyster.journey_log.finish(station2)
 p oyster.balance
 puts 
 oyster.touch_in(station2)

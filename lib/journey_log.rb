@@ -36,6 +36,6 @@ class JourneyLog
   end
 
   def update(journey)
-    @journeys << journey.dup
+    @journeys << journey
   end
 end

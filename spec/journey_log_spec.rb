@@ -2,7 +2,7 @@ require 'journey_log'
 
 describe JourneyLog do 
 
-  let(:journey) {double :journey} 
+  let(:journey) {double :journey, start: entry_station, end: exit_station, in_journey?: false} 
   let(:station) {double :station}
   let(:entry_station) {double :station}
   let(:entry_station2) {double :station}
@@ -14,14 +14,12 @@ describe JourneyLog do
   end
 
   it "starts a journey" do
-    allow(journey).to receive(:entry_station) {entry_station}
-    journey_log.start(journey)
-    expect(journey_log.(entry_station)).to eq journey.entry_station
+    expect(journey).to receive(:start).with(entry_station) 
+    journey_log.start(entry_station)
   end
 
   it "cannot start a new journey if the current journey is incomplete" do
-    # allow(journey).to receive(:entry_station) {entry_station}
-    # allow(journey).to receive(:exit_station) {exit_station}
+    expect(journey_log.finish(exit_station)).to eq journey
     # journey_log.start(journey)
     # journey_log.update(exit_station)
     # #Need to test status of journey
@@ -38,7 +36,7 @@ describe JourneyLog do
   end
 
   it "returns a list of all previous journeys" do 
+    journey_log.finish(exit_station)
+    expect(journey_log.journeys).to include(journey)
   end
-
-
 end

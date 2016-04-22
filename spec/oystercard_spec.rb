@@ -8,10 +8,6 @@ describe Oystercard do
     it "has a balance equals to 0" do
       expect(oystercard.balance).to eq 0
     end
-
-    it "has no journey history by default" do
-      expect(oystercard.journeys).to eq []
-    end
   end
 
 	describe "#top_up" do
@@ -39,17 +35,4 @@ describe Oystercard do
       expect { oystercard.touch_out(station) }.to change { oystercard.balance }.by -described_class::MINIMUM_FARE
     end
 	end
-
-  describe "#journeys" do
-    it "gives a list of journeys" do
-      oystercard.top_up 10
-      wimbledon = Station.new('wimbledon', 4)
-      blackfriars = Station.new('blackfriar', 1)
-      oystercard.touch_in(wimbledon)
-      oystercard.touch_out(blackfriars)
-      expect(oystercard.journeys).to include({wimbledon => blackfriars})
-    end
-  end
-
-
 end
